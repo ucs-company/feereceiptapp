@@ -3,7 +3,7 @@ import {
   amountInWords,
   getFormattedDate,
 } from '../services/pdfGenerator'
-import defaultSignature from '../../signature.jpeg'
+import defaultSignature from '../../stamp.png'
 
 export default function ReceiptTemplate({ donor, index, signature }) {
   const formattedDate = getFormattedDate()
@@ -106,21 +106,50 @@ export default function ReceiptTemplate({ donor, index, signature }) {
       </div>
 
       {/* Signature Section */}
-      <div style={{ marginTop: '40px' }}>
-        <b>For Mann Care Foundation</b>
-        <div style={{ marginTop: '5px' }}>
-          <img
-            src={signature || defaultSignature}
-            alt="Authorised Signatory"
-            style={{ height: '60px' }}
-          />
+      <div
+        style={{
+          marginTop: '25px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        }}
+      >
+        <img
+          src={signature || defaultSignature}
+          alt="Authorised Signatory"
+          style={{
+            width: '178px',
+            height: '',
+            display: 'block',
+            margin: 0,
+            padding: 0,
+            marginTop:'-16px'
+          }}
+        />
+
+        <div
+          style={{
+            marginTop: '-10px',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            lineHeight: '1.2',
+          }}
+        >
+          For Mann Care Foundation
         </div>
-        <div style={{ marginTop: '5px', fontWeight: 'bold', fontSize: '18px' }}>
+
+        <div
+          style={{
+            marginTop: '2px',
+            fontSize: '16px',
+            lineHeight: '1.2',
+          }}
+        >
           (Authorised Signatory)
         </div>
       </div>
 
-      <hr style={{ margin: '40px 0 30px', border: 'none', borderTop: '1px solid #999' }} />
+      <hr style={{ margin: '25px 0 20px', border: 'none', borderTop: '1px solid #999' }} />
 
       {/* Receipt Section */}
       <div style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '25px' }}>
