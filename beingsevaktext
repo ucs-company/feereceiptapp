@@ -1,512 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Donation Receipt</title>
- <style>
-  /* =============================================
-   Being Sevak Receipt - Exact Design Match
-   ============================================= */
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Being Sevak – Donation Receipt 79298</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ===== PRINT PAGE SETUP ===== */
+@page {
+  size: A4 portrait;
+  margin: 8mm 10mm 8mm 10mm;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Force colors to print */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
 }
 
-body {
-  background: #f0f0f0;
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  color: #111;
-  padding: 20px;
+:root {
+  --navy:   #1a3fa3;
+  --royal:  #1a3fa3;
+  --blue:   #2255cc;
+  --sky:    #3b7de8;
+  --pale:   #dce9fd;
+  --light:  #eef4ff;
+  --gold:   #c8a94a;
+  --teal:   #0d8c82;
+  --white:  #ffffff;
+  --dark:   #0c1a3a;
+  --mid:    #2a3f70;
+  --soft:   #546285;
+  --border: #aec5ef;
 }
 
+html, body {
+  width: 210mm;
+  height: 297mm;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 10px;
+  color: var(--dark);
+  background: #fff;
+}
+
+/* ===== OUTER PAGE ===== */
 .page {
-  width: 720px;
+  width: 190mm;
+  min-height: 277mm;
   margin: 0 auto;
   background: #fff;
-}
-
-/* ---- BOTH BOXES ---- */
-.receipt-box {
-  border: 5.5px solid #00a3da;
-  padding: 0;
-  background: #fff;
-}
-
-/* ---- HEADER ---- */
-.header {
-  display: flex;
-  align-items: center;
-  padding: 8px 14px;
-  border-bottom: 1.5px solid #1a2e6e;
-  gap: 12px;
-}
-
-.logo-area {
-  flex-shrink: 0;
-  width: 70px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-img {
-  max-width: 70px;
-  max-height: 70px;
-  object-fit: contain;
-}
-
-/* Placeholder circle if logo missing */
-.logo-area::after {
-  /* content: '🏛'; */
-  font-size: 36px;
-  display: block;
-}
-.logo-area:has(img[style*="display:none"])::after,
-.logo-area:not(:has(img))::after {
-  display: block;
-}
-.logo-area img {
-  position: relative;
-  z-index: 1;
-}
-
-.org-name-area {
-  text-align: center;
-  flex: 1;
-}
-
-.tagline {
-  color: #c0392b;
-  font-style: italic;
-  font-size: 11px;
-  margin-bottom: 2px;
-}
-
-.jurisdiction {
-  color: #c0392b;
-  font-style: italic;
-  font-size: 11px;
-  margin-bottom: 2px;
-}
-
-.org-name {
-  font-size: 22px;
-  font-weight: bold;
-  color: #1a2e6e;
-  letter-spacing: 1px;
-  font-family: 'Times New Roman', serif;
-  line-height: 1.2;
-}
-
-.bold-b {
-  font-size: 26px;
-  font-weight: 900;
-  color: #1a2e6e;
-}
-
-.reg-line {
-  font-size: 10px;
-  color: #c0392b;
-  margin-top: 2px;
-}
-
-.reg-line.small {
-  font-size: 9px;
-  color: #1a2e6e;
-}
-
-/* ---- TITLE BAR ---- */
-.title-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  border-bottom: 1px solid #1a2e6e;
-  padding: 5px 14px;
-}
-
-.cert-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #c0392b;
-  text-align: center;
-  flex: 1;
-  letter-spacing: 1px;
-}
-
-.receipt-meta {
-  font-size: 11px;
-  color: #111;
-  min-width: 130px;
-}
-
-.receipt-meta.right {
-  text-align: right;
-}
-
-/* ---- LETTER BODY ---- */
-.letter-body {
-  padding: 10px 18px 12px 18px;
-  line-height: 1.6;
-  font-size: 12px;
-}
-
-.letter-body p {
-  margin-bottom: 7px;
-}
-
-.amount-inline {
-  text-decoration: underline;
-  font-size: 12px;
-}
-
-.amount-figure {
-  float: right;
-  font-weight: bold;
-  font-size: 12px;
-  border-bottom: 1px solid #111;
-  padding-bottom: 1px;
-  margin-left: 10px;
-}
-
-.note-line {
-  font-weight: bold;
-  font-size: 10px;
-  margin-top: 6px;
-  border-top: 1px solid #111;
-  padding-top: 4px;
-}
-
-/* ---- DASHED SEPARATOR ---- */
-.dashed-sep {
-  border: none;
-  border-top: 2px dashed #1a2e6e;
-  margin: 0;
-}
-
-/* ---- FIELDS TABLE ---- */
-.fields-table {
-  width: 100%;
-  border-collapse: collapse;
-  padding: 0 14px;
-  margin: 10px 0 0 0;
-}
-
-.fields-table td {
-  padding: 4px 8px 4px 14px;
-  vertical-align: bottom;
-  font-size: 12px;
-}
-
-.fields-table .label {
-  white-space: nowrap;
-  color: #111;
-  font-weight: normal;
-  padding-right: 4px;
-}
-
-.fields-table .value {
-  color: #111;
-}
-
-.fields-table .value.underline {
-  border-bottom: 1px solid #555;
-  min-width: 60px;
-}
-
-.fields-table .value.bold {
-  font-weight: bold;
-}
-
-.text-right {
-  text-align: right;
-}
-
-/* ---- AMOUNT ROW ---- */
-.amount-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 8px 14px 10px 14px;
-  margin-top: 4px;
-  border-top: 1px solid #1a2e6e;
-}
-
-.amount-box {
-  flex: 1;
-}
-
-.amount-header {
-  font-weight: bold;
-  font-size: 14px;
-  border: 1.5px solid #1a2e6e;
-  display: inline-block;
-  padding: 3px 8px;
-  background: #fff;
-  margin-bottom: 2px;
-}
-
-.amount-value-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.rs {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.amount-value {
-  font-weight: bold;
-  font-size: 14px;
-  border: 1.5px solid #1a2e6e;
-  padding: 2px 10px;
-}
-
-.pan-label {
-  font-weight: bold;
-  font-size: 14px;
-  border: 1.5px solid #1a2e6e;
-  padding: 2px 6px;
-}
-
-.pan-value {
-  font-weight: bold;
-  font-size: 14px;
-  border: 1.5px solid #1a2e6e;
-  padding: 2px 20px;
-}
-
-.realisation-note {
-  font-size: 9px;
-  font-style: italic;
-  color: #333;
-  margin-bottom: 3px;
-}
-
-.email-row {
-  font-size: 11px;
-  margin-bottom: 3px;
-}
-
-.system-note {
-  font-size: 12px;
-  font-style: italic;
-  text-align: center;
-  margin-top: 4px;
-}
-
-/* ---- SEAL AREA ---- */
-.seal-area {
-  text-align: right;
-  min-width: 130px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
 }
 
-.seal-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
+/* ===== TOP ACCENT BAR ===== */
+.bar-top {
+  height: 5px;
+  background:#009BD4;
 }
 
-.auth-sign {
-  font-size: 11px;
-  text-align: right;
-  line-height: 1.5;
+/* ===== HEADER ===== */
+header {
+background: linear-gradient(to right, #009BD4 0%, #0285C3 25%, #046FB1 50%, #074D97 75%, #083D8B 100%);
+  padding: 10px 14px 9px;
+  display: grid;
+  grid-template-columns: 62px 1fr 100px;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Left circular logo */
+.logo-circle {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-circle svg { width: 26px; height: 26px; fill: rgba(255,255,255,0.8); }
+.logo-circle span { font-size: 6.5px; color: rgba(255,255,255,0.75); text-align: center; margin-top: 2px; letter-spacing: 0.3px; line-height: 1.2; }
 
-.logo-box{
-    width:250px;
-    height:80px;
-    border:1px solid #ccc;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+/* Centre org info */
+.hdr-center { text-align: center; }
+.hdr-tagline { font-style: italic; font-size: 7.5px; color: rgba(255,255,255,0.65); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 3px; }
+.hdr-name { font-family: 'Merriweather', serif; font-size: 20px; font-weight: 700; color: #fff; line-height: 1; letter-spacing: 0.5px; }
+.hdr-name .gold { color: #fff; }
+.hdr-sub { font-size: 7px; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-top: 3px; }
+.hdr-reg { font-size: 7px; color: #fff; margin-top: 4px; line-height: 1.5; }
+
+/* Right rectangular logo */
+.logo-rect {
+  width: 98px; height: 56px;
+  border: 1.5px dashed rgba(255,255,255,0.3);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.logo-rect svg { width: 20px; height: 20px; fill: rgba(255,255,255,0.35); }
+.logo-rect span { font-size: 6.5px; color: rgba(255,255,255,0.4); margin-top: 3px; text-align: center; letter-spacing: 0.3px; }
+
+/* ===== TITLE BAR ===== */
+.title-bar {
+  background: #009BD4;
+  padding: 5px 0;
+  text-align: center;
+}
+.title-bar h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 10px; font-weight: 700;
+  color: #fff; letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.logo-box img{
-    max-width:95%;
-    max-height:95%;
-    object-fit:contain;
+/* ===== BODY ===== */
+.body {
+  flex: 1;
+  padding: 10px 14px 8px;
+  background: #fff;
+  position: relative;
 }
 
+/* Watermark */
+.body::before {
+  content: "BEING SEVAK";
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%) rotate(-28deg);
+  font-family: 'Merriweather', serif; font-size: 48px; font-weight: 700;
+  color: rgba(26,63,163,0.04); white-space: nowrap;
+  pointer-events: none; z-index: 0; letter-spacing: 6px;
+}
+.body > * { position: relative; z-index: 1; }
 
-/* ---- PRINT STYLES ---- */
+/* ── META ROW ── */
+.meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--light);
+  border: 1px solid var(--pale);
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-bottom: 8px;
+}
+.meta-item { display: flex; flex-direction: column; gap: 1px; }
+.m-label { font-size: 7px; text-transform: uppercase; letter-spacing: 1px; color: var(--soft); }
+.m-value { font-size: 11px; font-weight: 700; color: var(--royal); }
+
+/* ── GREETING ── */
+.greeting { font-size: 9px; color: var(--soft); margin-bottom: 2px; }
+.donor-line { font-size: 10px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.donor-line span { color: var(--royal); }
+
+.para {
+  font-size: 9px; color: var(--dark); line-height: 1.65;
+  margin-bottom: 6px;
+}
+.para strong { color: var(--navy); }
+.amt-badge {
+  background: var(--pale); color: var(--royal);
+  font-weight: 700; padding: 1px 6px; border-radius: 3px;
+  font-size: 10px;
+}
+
+/* ── DETAILS TABLE ── */
+.det-section {
+  border: 1px solid var(--border);
+  border-radius: 5px; overflow: hidden;
+  margin-bottom: 7px;
+}
+.det-head {
+  background:#009BD4;
+  padding: 5px 12px;
+  font-size: 8px; font-weight: 700;
+  color: #fff; letter-spacing: 2px; text-transform: uppercase;
+}
+.det-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.det-cell {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--pale);
+  border-right: 1px solid var(--pale);
+}
+.det-cell:nth-child(even) { border-right: none; }
+.det-cell:nth-last-child(-n+2) { border-bottom: none; }
+.d-lbl { font-size: 7px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--soft); margin-bottom: 1px; }
+.d-val { font-size: 9.5px; font-weight: 600; color: var(--dark); }
+.d-val.hi { color: var(--royal); }
+
+/* ── AMOUNT BANNER ── */
+.amt-banner {
+  background:#009bd4;
+  border-radius: 4px;
+  padding: 8px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 7px;
+}
+.ab-left { display: flex; flex-direction: column; gap: 2px; }
+.ab-tag { font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; color:#fff; }
+.ab-words { font-size: 9px; color: rgba(255,255,255,0.88); font-style: italic; }
+.ab-right { text-align: right; }
+.ab-label { font-size: 7px; letter-spacing: 1px; color: #fff; }
+.ab-num { font-family: 'Merriweather', serif; font-size: 22px; font-weight: 700; color: #fff; line-height: 1; }
+
+/* ── ACTIVITIES BOX ── */
+.act-box {
+  border-left: 3px solid var(--sky);
+  background: var(--light);
+  padding: 6px 10px;
+  font-size: 8.5px; color: var(--mid); line-height: 1.65;
+  margin-bottom: 6px; border-radius: 0 4px 4px 0;
+}
+.act-box strong { color: var(--navy); }
+
+/* ── TAX NOTE ── */
+.tax-note {
+  background: #f0fdf9;
+  border: 1px solid #9ef0e0;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 8.5px; color: var(--teal); font-weight: 600;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.tax-note::before { content: "✦"; font-size: 11px; }
+
+/* ── CLOSING ── */
+.closing { font-size: 8.5px; color: var(--mid); line-height: 1.65; margin-bottom: 8px; }
+
+/* ── SIGN ROW ── */
+.sign-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding-top: 8px;
+  border-top: 1.5px solid var(--pale);
+}
+.sign-left { font-size: 8px; color: var(--dark); line-height: 1.7; }
+.sign-left strong { font-size: 10px; color: var(--navy); font-family: 'Merriweather', serif; }
+
+/* Stamp */
+.stamp-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.stamp {
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 2.5px double var(--royal);
+  background: radial-gradient(circle, rgba(220,232,251,0.4) 0%, rgba(255,255,255,0) 70%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.stamp::before {
+  content: '';
+  position: absolute; inset: 4px; border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.stamp-in { text-align: center; z-index: 1; }
+.stamp-in svg { width: 20px; height: 20px; fill: var(--royal); opacity: 0.75; display: block; margin: 0 auto 2px; }
+.stamp-in .s1 { font-size: 6px; font-weight: 700; color: var(--royal); letter-spacing: 0.5px; line-height: 1.3; display: block; }
+.stamp-in .s2 { font-size: 6px; color: var(--soft); letter-spacing: 1px; display: block; margin-top: 1px; }
+.stamp-cap { font-size: 7.5px; color: var(--soft); letter-spacing: 0.3px; }
+
+/* ===== FOOTER STRIP ===== */
+.footer-strip {
+ background: linear-gradient(to right, #009BD4 0%, #0285C3 25%, #046FB1 50%, #074D97 75%, #083D8B 100%);
+  padding: 8px 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.fi { font-size: 7.5px; color: #fff; line-height: 1.65; }
+.fi strong { font-size: 7px; color: rgba(255,255,255,0.88); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 1px; }
+
+.auto-note {
+  background: var(--light);
+  text-align: center; padding: 4px;
+  font-size: 8px; color: var(--soft); letter-spacing: 1px;
+}
+
+.bar-bot {
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--sky), var(--royal), var(--navy));
+}
+
+/* ===== PRINT MEDIA ===== */
 @media print {
-  body {
-    background: #fff;
-    padding: 0;
-  }
-  .page {
-    width: 100%;
-    margin: 0;
-  }
-  .no-print {
-    display: none !important;
+  html, body { width: 210mm; height: 297mm; margin: 0; padding: 0; background: #fff; }
+  .page { width: 190mm; min-height: 277mm; border: 1px solid #aec5ef; }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 }
-
- </style>
+</style>
 </head>
 <body>
-  <div class="page">
+<div class="page">
 
-    <!-- ===== TOP SECTION: Thank You Letter ===== -->
-    <div class="receipt-box top-box">
+  <div class="bar-top"></div>
 
-      <!-- Header -->
-      <div class="header">
-        <div class="logo-area">
-          <!-- REPLACE: apna logo yahan daalein -->
-          <img src="logo.jpg" alt="" class="logo-img"  />
-        </div>
-        <div class="org-name-area">
-          <div class="tagline">We Rise By Lifting Others</div>
-          <div class="logo-title">
-          <div class="logo-box">
-          <img src="logo.png" alt="Being Sevak Logo">
-          </div>
-          </div>
-          <div class="reg-line">Charity Commissioner (Reg.) No. E-31948 &nbsp;|&nbsp; Income Tax, Exempted Under 80G No. AACTB6422FF20214</div>
-        </div>
+  <!-- HEADER -->
+  <header>
+    <div class="logo-circle">
+      <svg viewBox="0 0 24 24"><path d="M16.5 12c1.38 0 2.49-1.12 2.49-2.5S17.88 7 16.5 7C15.12 7 14 8.12 14 9.5S15.12 12 16.5 12zM9 11c1.66 0 2.99-1.34 2.99-3S10.66 5 9 5C7.34 5 6 6.34 6 8s1.34 3 3 3zm7.5 3c-1.83 0-5.5.92-5.5 2.75V19h11v-2.25c0-1.83-3.67-2.75-5.5-2.75zM9 13c-2.33 0-7 1.17-7 3.5V19h7v-2.25c0-.85.33-2.34 2.37-3.47C10.5 13.1 9.66 13 9 13z"/></svg>
+      <span>BEING<br/>SEVAK</span>
+    </div>
+    
+    <div class="hdr-center">
+      <p class="hdr-tagline">We Rise By Lifting Others</p>
+      <h1 class="hdr-name"><span class="gold">Being</span> Sevak Charitable Trust</h1>
+      <p class="hdr-sub">Charity Commissioner (Reg.) No. E-31948</p>
+      <p class="hdr-reg">
+        Income Tax Exempted Under 80G No. AACTB6422FF20214 &nbsp;|&nbsp; PAN No. AACTB6422F<br/>
+        80G Reg. No.: AACTB6422FF20214 &nbsp;|&nbsp; CSR Reg. No.: CSR00015528
+      </p>
+    </div>
+
+    <div class="logo-rect">
+      <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+      <span>PLACE LOGO<br/>HERE (PNG)</span>
+    </div>
+  </header>
+
+  <!-- TITLE BAR -->
+  <div class="title-bar">
+    <h2>80G &nbsp;·&nbsp; Certificate of Donation</h2>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- Meta row -->
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="m-label">Receipt No.</span>
+        <span class="m-value">79298</span>
       </div>
-
-      <!-- Title Bar -->
-      <div class="title-bar">
-        <div class="receipt-meta left">
-          <span>Receipt No. &nbsp;<strong id="receipt-no-top">79298</strong></span>
-        </div>
-        <div class="cert-title">80G CERTIFICATE OF DONATION</div>
-        <div class="receipt-meta right">
-          <span>Date: &nbsp;<strong id="receipt-date-top">1-Jun-26</strong></span>
-        </div>
+      <div class="meta-item" style="text-align:center">
+        <span class="m-label">Mode of Payment</span>
+        <span class="m-value">Online</span>
       </div>
-
-      <!-- Body -->
-      <div class="letter-body">
-        <p><strong>NAME: &nbsp;&nbsp;<span id="donor-name-top">Subramanyam Sridhar</span></strong></p>
-        <p>Dear Sir/Madam,</p>
-        <p>
-          <strong>Being Sevak Charitable Trust</strong>, would like to thanks you for your generous donation of
-          <strong class="amount-inline" id="amount-words-top">One Thousand Five Hundred Rupees and No. Paise Only</strong>
-          <span class="amount-figure" id="amount-fig-top">Rs. 1,500.00</span>
-          for noble cause &amp; Make a Difference.
-        </p>
-        <p>
-          Your financial support helps us to continue in our mission. With the valuable support of donor <strong>LIKE YOU</strong>,
-          We are be able to help many of needy families and individuals for not only to meet essential daily needs, but to
-          manage their live-hood through our different activities like Food-grain Kit Distribution, Medical Kit Distribution,
-          Education Facilities &amp; many other activities.
-        </p>
-        <p>Please keep this written acknowledgement of your donation for your tax records.</p>
-        <p>
-          We thank you once again for your support and love we have received from you, We also hope forward to
-          your continued support.
-        </p>
-        <p>Thanking you,<br/>Yours truly,<br/><strong>Being Sevak Charitable Trust</strong></p>
-        <p class="note-line">
-          Note: Your Donation to Being Sevak Charitable Trust Is Eligible For 50% Tax Rebate [U/S 80G of Income Tax Act 1961]
-        </p>
+      <div class="meta-item" style="text-align:center">
+        <span class="m-label">Payment ID No.</span>
+        <span class="m-value">615211600684</span>
+      </div>
+      <div class="meta-item" style="text-align:right">
+        <span class="m-label">Dated</span>
+        <span class="m-value">1-Jun-2026</span>
       </div>
     </div>
 
-    <!-- Dashed separator -->
-    <div class="dashed-sep"></div>
+    <p class="greeting">Dear Sir / Madam,</p>
+    <p class="donor-line">Received with thanks from: <span>Ms./Mr./Miss. Subramanyam Sridhar</span></p>
 
-    <!-- ===== BOTTOM SECTION: Formal Receipt ===== -->
-    <div class="receipt-box bottom-box">
+    <p class="para">
+      <strong>Being Sevak Charitable Trust</strong> would like to thank you for your generous donation of
+      <span class="amt-badge">Rs. 1,500.00</span> &mdash;
+      <em>One Thousand Five Hundred Rupees and No Paise Only</em> &mdash; for a noble cause &amp; Make a Difference.
+    </p>
 
-      <!-- Header -->
-      <div class="header">
-        <div class="logo-area">
-          <img src="logo.jpg" alt="Trust Logo" class="logo-img"  />
-        </div>
-        <div class="org-name-area">
-          <div class="jurisdiction">Subject to Mumbai Jurisdiction</div>
-          <div class="org-name"><span class="bold-b">B</span>EING <span class="bold-b">S</span>EVAK Charitable Trust</div>
-          <div class="reg-line">Charity Commissioner (Reg.) No. E-31948, Certificate Under Section 80G of the Income Tax Act 1961</div>
-          <div class="reg-line">* 80G Registration No. AACTB6422FF20214 &nbsp;*CSR Registration No. CSR00015528</div>
-          <div class="reg-line small">Registered Add: 401, 4th Floor, 'A' Wing, New Delite Apartment, Chandavarkar Lane, Borivali (West), Mumbai - 92.</div>
-          <div class="reg-line small">*Website: www.beingsevak.org &nbsp;*Email: being.sevak@gmail.com &nbsp;*Trust PAN CARD No AACTB6422F</div>
-          <div class="reg-line small">Helpline Number SEVAK: *8879-035-035 &nbsp;*8879-034-034</div>
-        </div>
+    <!-- Details grid -->
+    <div class="det-section">
+      <div class="det-head">Donation Details</div>
+      <div class="det-grid">
+        <div class="det-cell"><div class="d-lbl">Receipt No.</div><div class="d-val">79298</div></div>
+        <div class="det-cell"><div class="d-lbl">Donor Name</div><div class="d-val hi">Subramanyam Sridhar</div></div>
+        <div class="det-cell"><div class="d-lbl">Address</div><div class="d-val">NA</div></div>
+        <div class="det-cell"><div class="d-lbl">On Account Of</div><div class="d-val">Corpus</div></div>
+        <div class="det-cell"><div class="d-lbl">Bank Name</div><div class="d-val">NA</div></div>
+        <div class="det-cell"><div class="d-lbl">Payment ID No.</div><div class="d-val">*615211600684</div></div>
+        <div class="det-cell"><div class="d-lbl">PAN No.</div><div class="d-val">NA</div></div>
+        <div class="det-cell"><div class="d-lbl">Email ID</div><div class="d-val">NA</div></div>
+      
+      </div>
+    </div>
+
+    <!-- Amount banner -->
+    <div class="amt-banner">
+      <div class="ab-left">
+        <span class="ab-tag">Sum of Rupees</span>
+        <span class="ab-words">One Thousand Five Hundred Rupees and No Paise Only</span>
+      </div>
+      <div class="ab-right">
+        <div class="ab-label">AMOUNT (INR)</div>
+        <div class="ab-num">1,500.00</div>
+      </div>
+    </div>
+
+    <!-- Activities -->
+    <div class="act-box">
+      Your financial support helps us continue our mission. With the valuable support of donors <strong>LIKE YOU</strong>,
+      we are able to help many needy families and individuals to meet essential daily needs and manage their livelihood through
+      activities like <strong>Food-grain Kit Distribution, Medical Kit Distribution, Education Facilities</strong> &amp; many other activities.
+    </div>
+
+    <!-- Tax note -->
+    <div class="tax-note">
+      Your donation to Being Sevak Charitable Trust is eligible for <strong>50% Tax Rebate</strong> [U/S 80G of Income Tax Act 1961].
+      Please keep this written acknowledgement for your tax records.
+    </div>
+
+    <p class="closing">
+      We thank you once again for your support and love we have received from you. We also look forward to your continued support.<br/>
+      <br/>
+      Thanking you, &nbsp; Yours truly,
+    </p>
+
+    <!-- Signature row -->
+    <div class="sign-row">
+      <div class="sign-left">
+        <strong>Being Sevak Charitable Trust</strong><br/>
+        Reg. Add.: 401, 4th Floor, A-Wing, New Delhi Apartment,<br/>
+        Chandavarkar Lane, Borivali (West), Mumbai – 92.<br/>
+        Website: www.beingsevak.org &nbsp;|&nbsp; Email: being.sevak@gmail.com<br/>
+        Helpline: SEVAK: *878-035-035 &nbsp;|&nbsp; *879-034-034
       </div>
 
-      <!-- Receipt Fields -->
-      <table class="fields-table">
-        <tr>
-          <td class="label">Receipt No.</td>
-          <td class="value underline" id="receipt-no-bot">79298</td>
-          <td class="label text-right">Dated:</td>
-          <td class="value underline" id="receipt-date-bot">1-Jun-26</td>
-        </tr>
-        <tr>
-          <td class="label" colspan="1">RECEIVED with thanks from Ms./Mr./Miss.</td>
-          <td class="value underline bold" colspan="3" id="donor-name-bot">Subramanyam Sridhar</td>
-        </tr>
-        <tr>
-          <td class="label">Address:</td>
-          <td class="value underline bold" colspan="3" id="address">NA</td>
-        </tr>
-        <tr>
-          <td class="label">The Sum of Rupees:</td>
-          <td class="value underline bold" colspan="3" id="amount-words-bot">One Thousand Five Hundred Rupees and No. Paise Only</td>
-        </tr>
-        <tr>
-          <td class="label">Mode of Payment:</td>
-          <td class="value underline bold" id="mode">Online</td>
-          <td class="label">Payment ID No.:</td>
-          <td class="value underline bold" id="payment-id">*615211600684</td>
-        </tr>
-        <tr>
-          <td class="label">Bank Name:</td>
-          <td class="value underline bold" id="bank">NA</td>
-          <td colspan="2"></td>
-        </tr>
-        <tr>
-          <td class="label">On Account Of:</td>
-          <td class="value underline bold" colspan="3" id="account-of">Corpus</td>
-        </tr>
-      </table>
-
-      <!-- Amount + PAN + Seal row -->
-      <div class="amount-row">
-        <div class="amount-box">
-          <!-- <div class="amount-header">Amount (INR)</div> -->
-          <div class="amount-value-row">
-            <span class="amount-header"> Amount (INR)</span>
-            <span class="rs">Rs.</span>
-            <span class="amount-value" id="amount-fig-bot">1,500.00</span>
-            <span class="pan-label">PAN NO:</span>
-            <span class="pan-value" id="pan-no">NA</span>
+      <div class="stamp-wrap">
+        <div class="stamp">
+          <div class="stamp-in">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+            <span class="s1">BEING SEVAK<br/>CHARITABLE TRUST</span>
+            <span class="s2">MUMBAI</span>
           </div>
-          <div class="realisation-note">Donation Payment is Subject to Realisation</div>
-          <div class="email-row">Email ID: &nbsp;<span id="email">NA</span></div>
-          <div class="system-note">****This is system generated auto receipt****</div>
         </div>
-        <div class="seal-area">
-          <!-- REPLACE: apni seal/stamp yahan daalein -->
-          <img src="logo.jpg" alt="Seal" class="seal-img" onerror="this.style.display='none'" />
-          <div class="auth-sign">Authorised Sign.<br/><strong>Being Sevak Charitable Trust</strong></div>
-        </div>
+        <span class="stamp-cap">Authorised Sign.</span>
       </div>
+    </div>
 
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer-strip">
+    <div class="fi">
+      <strong>Registered Address</strong>
+      401, 4th Floor, A-Wing, New Delhi Apartment, Chandavarkar Lane,<br/>
+      Borivali (West), Mumbai – 92.
+    </div>
+    <div class="fi">
+      <strong>Registration Details</strong>
+      80G Reg. No.: AACTB6422FF20214 &nbsp;|&nbsp; Trust PAN: AACTB6422F<br/>
+      CSR Reg. No.: CSR00015528 &nbsp;|&nbsp; Charity Comm. Reg. No.: E-31948
     </div>
   </div>
 
-  <!-- <script src="script.js"></script> -->
+  <div class="auto-note">★★★★ This is a system generated auto receipt ★★★★</div>
+  <div class="bar-bot"></div>
+
+</div>
 </body>
 </html>
