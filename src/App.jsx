@@ -46,7 +46,7 @@ export default function App() {
             </div>
             <div className="min-w-0">
               <h1 className="text-base sm:text-xl font-bold text-white truncate drop-shadow-sm">
-                NGO Donation Receipt Generator
+                ULTIMATE FUND RAYS SOLUTIONS Receipt Generator
               </h1>
               <p className="text-xs sm:text-sm text-pink-100 truncate">
                 Upload Excel & generate donation receipts
