@@ -63,9 +63,12 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
             <div style={{ fontSize: '13px', fontWeight: 600, color: ACCENT, marginBottom: '5px', lineHeight: '1.2' }}>
               We Rise By Lifting Others
             </div>
-            <div style={{ width: '100%', textAlign: 'center', marginBottom: '4px' }}>
-              <img src={beingSevakName} alt="Being Sevak Charitable Trust" style={{ width:'310px', height: '44px', display: 'inline-block' }} />
+            <div style={{ fontSize: '20px', fontWeight: 700,  marginBottom: '4px' }}>
+              <span style={{ fontWeight: 800, fontSize: '22px' }}></span> <span style={{ fontWeight: 800, fontSize: '22px' }}></span>Being Sevak Charitable Trust
             </div>
+            {/* <div style={{ width: '100%', textAlign: 'center', marginBottom: '4px' }}>
+              <img src={beingSevakName} alt="Being Sevak Charitable Trust" style={{ width:'308px', height: 'px', display: 'inline-block' }} />
+            </div> */}
             <div style={{ fontSize: '11px', color: '#000', lineHeight: '1.3', textAlign: 'center' }}>
               Charity Commissioner (Reg.) No: E-31948 &nbsp;|&nbsp;
               Income Tax Exempted Under 80G No: AACTB6422FF20214
@@ -126,8 +129,8 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
             <img src={beingSevakLogo} alt="Trust Logo" style={{ width: '70px', height: 'auto', display: 'block' }} />
           </div>
           <div style={{ display: 'table-cell', textAlign: 'center', verticalAlign: 'middle', padding: '0 10px' }}>
-            <div style={{ fontSize: '20px', fontWeight: 700, color: ACCENT, marginBottom: '4px' }}>
-              <span style={{ fontWeight: 800, fontSize: '22px' }}>B</span>EING <span style={{ fontWeight: 800, fontSize: '22px' }}>S</span>EVAK Charitable Trust
+            <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '4px' }}>
+              <span style={{ fontWeight: 800, fontSize: '22px' }}></span> <span style={{ fontWeight: 800, fontSize: '22px' }}></span>Being Sevak Charitable Trust
             </div>
             <div style={{ fontSize: '11px', color: '#000', lineHeight: '1.4' }}>
               Charity Commissioner (Reg.) No: E-31948, Certificate Under Section 80G of the Income Tax Act 1961
