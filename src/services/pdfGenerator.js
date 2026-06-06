@@ -52,7 +52,7 @@ export function amountInWords(amount) {
   if (thousand > 0) res += convertBelow1000(thousand) + ' Thousand '
   if (remainder > 0) res += convertBelow1000(remainder)
 
-  return res.trim() + ' Only'
+  return res.trim() + ''
 }
 
 export function getFormattedDate() {
