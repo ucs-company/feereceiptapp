@@ -71,8 +71,14 @@ export default function ReceiptTemplate({ donor, index, signature }) {
           <br /><br />
           {formattedDate}
           <br /><br />
-          {donor['Donor Name'].toUpperCase()}<br />
+        <span style={{ fontWeight: 'bold' }}>
+  {donor['Donor Name'].toUpperCase()}
+</span>
+<br />
           {donor['Address 1']}<br />
+          {[donor['City'], donor['State'], donor['Pincode']].some(Boolean) && (
+            <>{donor['City']}{donor['City'] && donor['State'] ? ', ' : ''}{donor['State']}{donor['State'] && donor['Pincode'] ? ' - ' : ''}{donor['Pincode']}<br /></>
+          )}
           PAN No. - {donor['PAN No.']}
           <br />
           Email - {donor['Email ID']}
@@ -96,9 +102,10 @@ export default function ReceiptTemplate({ donor, index, signature }) {
             Mann Care Foundation
           </div>
           <div style={{ color: '#d10087', lineHeight: '1.8', fontSize: '18px' }}>
-            *80G Registration CIN No. U88900MH2026NPL471199<br />
-            TAN No. : MUMM75033A<br />
-            *Trust PAN Card No. AAUCM9048B
+            80G Registration <br/>
+            CIN No : U88900MH2026NPL471199<br />
+            TAN No : MUMM75033A<br />
+            Trust PAN Card No : AAUCM9048B
           </div>
         </div>
       </div>
@@ -114,7 +121,7 @@ export default function ReceiptTemplate({ donor, index, signature }) {
       </div>
 
       <div style={{ fontSize: '20px', textAlign: 'center', marginBottom: '25px' }}>
-        We confirm the receipt of donation from Mr/Ms/Mrs {donor['Donor Name'].toUpperCase()} as per details below:-
+        We confirm the receipt of donation from Mr/Ms/Mrs <strong>{donor['Donor Name'].toUpperCase()}</strong> as per details below:-
       </div>
 
       <table
@@ -161,7 +168,7 @@ export default function ReceiptTemplate({ donor, index, signature }) {
         </tbody>
       </table>
       <div style={{ marginTop: '35px', lineHeight: '1.7', fontSize: '18px' }}>
-        Dear {donor['Donor Name'].toUpperCase()}
+        Dear <strong>{donor['Donor Name'].toUpperCase()}</strong>
         <br /><br />
         Thank You for Your Generous Support {formatIndianCurrency(amount)} On behalf of Mann Care Foundation, we sincerely thank you for your valuable contribution. Your generosity helps us continue our mission of supporting those in need and creating a positive impact in the community.
         Thank you for being a part of this noble cause and helping us make a difference.
@@ -177,7 +184,7 @@ export default function ReceiptTemplate({ donor, index, signature }) {
         MCF2026NPL471199 approved on 02 June 2026 which is valid till AY2026-27.
         This receipt is invalid in case of non-realization of the money instrument
         or reversal of the credit/debit card charge or reversal of donation amount
-        for any reason. IT PAN: <span style={{ color: '#d10087', fontWeight: 'bold' }}>AAUCM9048B.</span>
+        for any reason. IT PAN : <span style={{ color: '#d10087', fontWeight: 'bold' }}>AAUCM9048B.</span>
       </div>
 
       <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'justify' }}>
@@ -300,8 +307,19 @@ export default function ReceiptTemplate({ donor, index, signature }) {
           1708, One World, S.V. Road,
           Near N.M. High School,  Malad (West),Mumbai - 400064
         </div>
+        
       </div>
-
+        <div
+  style={{
+    marginTop: '10px',
+    textAlign: 'center',
+    fontSize: '20px',
+    fontWeight: '600',
+    color: '#050000'
+  }}
+>
+  Subject to Mumbai Jurisdiction
+</div>
       
     </div>
   )

@@ -10,11 +10,11 @@ const ORG = {
   ashray: {
     tagline: 'RAY OF HOPE',
     name: 'ASHRAY FOR LIFE FOUNDATION',
-    regNo: 'Charity Commissioner (Reg.) No. E-37237',
+    regNo: 'Charity Commissioner (Reg.) No : E-37237',
     cert80g: 'Certificate Under Section 80G of Income Tax Act 1961',
-    reg80g: '*80G Registration No. AAJTA4535BF2022101',
-    csrReg: '*CSR Registration No.CSR00069515',
-    panCard: '*PAN CARD No AAJTA4535B',
+    reg80g: '80G Registration No : AAJTA4535BF2022101',
+    csrReg: 'CSR Registration No : CSR00069515',
+    panCard: 'PAN CARD No : AAJTA4535B',
     address:
       'Unit - 218, 2nd Floor, Meter No.2, Auris Galleria, New Link Road, Auris Serenity, Malad (West), Mumbai - 400064.',
     website: 'www.aflf.org',
@@ -22,20 +22,20 @@ const ORG = {
     helpline: '*9930028300 *9930028200',
     donorEmail: 'donorcare@aflf.org',
   },
-  beingsevak: {
-    tagline: 'RAY OF HOPE',
-    name: 'BEING SEVAK FOUNDATION',
-    regNo: '',
-    cert80g: '',
-    reg80g: '',
-    csrReg: '',
-    panCard: '',
-    address: '',
-    website: '',
-    email: '',
-    helpline: '',
-    donorEmail: '',
-  },
+  // beingsevak: {
+  //   tagline: 'RAY OF HOPE',
+  //   name: 'BEING SEVAK FOUNDATION',
+  //   regNo: '',
+  //   cert80g: '',
+  //   reg80g: '',
+  //   csrReg: '',
+  //   panCard: '',
+  //   address: '',
+  //   website: '',
+  //   email: '',
+  //   helpline: '',
+  //   donorEmail: '',
+  // },
 }
 
 const primary = '#8d636e'
@@ -94,18 +94,18 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
         style={{
           display: 'flex',
           alignItems: 'center',
-          padding: '20px',
+          padding: '9px',
           background: grad,
           color: '#fff',
         }}
       >
-        <div style={{ width: '140px', textAlign: 'center' }}>
-          <img src={ashrayLogo} alt="Logo" style={{  }} />
+        <div style={{ width: '170px', textAlign: 'center' }}>
+          <img src={ashrayLogo} alt="Logo" style={{ maxWidth:'100%' }} />
         </div>
         <div style={{ flex: 1, textAlign: 'center' }}>
-          <div style={{ fontSize: '13px', letterSpacing: '3px', opacity: 0.9 }}>{org.tagline}</div>
-          <div style={{ fontSize: '30px', fontWeight: 800, margin: '5px 0' }}>{org.name}</div>
-          <div style={{ fontSize: '11px', lineHeight: '1.6' }}>
+          <div style={{ fontSize: '13px', letterSpacing: '3px', opacity: 0.9, marginRight: '136px' }}>{org.tagline}</div>
+          <div style={{ fontSize: '30px', fontWeight: 800, margin: '5px 0', marginRight: '110px' }}>{org.name}</div>
+          <div style={{ fontSize: '11px', lineHeight: '1.6', marginRight:'110px' }}>
             {org.regNo}, {org.cert80g}
             <br />
             {org.reg80g}{org.csrReg && <> | {org.csrReg}</>}
@@ -135,7 +135,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
       <div style={{ padding: '25px' }}>
         {/* Date & Receipt No */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Dated:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Dated:</span>
           <div
             style={{
               flex: 1,
@@ -150,7 +150,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
             {formattedDate}
           </div>
           <div style={{ flex: 1 }} />
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Receipt No.</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Receipt No.</span>
           <div
             style={{
               flex: 1,
@@ -168,7 +168,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
 
         {/* Donor Name */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Received from thanks Mr./Mrs./Ms. :</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Received from thanks Mr./Mrs./Ms :</span>
           <div
             style={{
               flex: 1,
@@ -185,7 +185,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
 
         {/* Address */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Address:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Address:</span>
           <div
             style={{
               flex: 1,
@@ -202,7 +202,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
 
         {/* City / State / Pin Code */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>City:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>City:</span>
           <div
             style={{
               minHeight: '28px',
@@ -210,13 +210,13 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               color: '#222',
               fontWeight: 600,
               borderBottom: `2px solid ${secondary}`,
-              width: '120px',
+              width: '170px',
             }}
           >
-            NA
+            {donor['City'] || ''}
           </div>
           <div style={{ width: '20px' }} />
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>State:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>State:</span>
           <div
             style={{
               minHeight: '28px',
@@ -224,13 +224,13 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               color: '#222',
               fontWeight: 600,
               borderBottom: `2px solid ${secondary}`,
-              width: '120px',
+              width: '170px',
             }}
           >
-            NA
+            {donor['State'] || ''}
           </div>
           <div style={{ width: '20px' }} />
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Pin Code:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Pin Code:</span>
           <div
             style={{
               minHeight: '28px',
@@ -238,16 +238,16 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               color: '#222',
               fontWeight: 600,
               borderBottom: `2px solid ${secondary}`,
-              width: '120px',
+              width: '187px',
             }}
           >
-            NA
+            {donor['Pincode'] || ''}
           </div>
         </div>
 
         {/* Amount in Words */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>The Sum of Rupees:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>The Sum of Rupees:</span>
           <div
             style={{
               flex: 1,
@@ -265,7 +265,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
         {/* Mode of Payment + Payment ID */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', gap: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
-            <span style={{ fontWeight: 700, color: dark, marginRight: '8px', whiteSpace: 'nowrap' }}>Mode of Payment:</span>
+            <span style={{ fontWeight: 700, color: dark, marginRight: '8px', whiteSpace: 'nowrap', marginBottom: '5px' }}>Mode of Payment:</span>
             <div
               style={{
                 flex: 1,
@@ -280,7 +280,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
-            <span style={{ fontWeight: 700, color: dark, marginRight: '8px', whiteSpace: 'nowrap' }}>Payment ID No.:</span>
+            <span style={{ fontWeight: 700, color: dark, marginRight: '8px', whiteSpace: 'nowrap', marginBottom: '5px' }}>Payment ID No :</span>
             <div
               style={{
                 flex: 1,
@@ -298,7 +298,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
 
         {/* Account Of */}
         <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px' }}>Account Of:</span>
+          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Account Of:</span>
           <div
             style={{
               flex: 1,
@@ -328,8 +328,8 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               fontWeight: 700,
               color: primary,
             }}>
-              <div style={{ flex: 1, textAlign: 'center' }}>Amount (INR).</div>
-              <div style={{ flex: 1, textAlign: 'center' }}>Rs.{amount.toFixed(2)}</div>
+              <div style={{ flex: 1, textAlign: 'center', marginBottom: '20px' }}>Amount (INR).</div>
+              <div style={{ flex: 1, textAlign: 'center', marginBottom: '20px' }}>Rs.{amount.toFixed(2)}</div>
             </div>
           </div>
           <div style={{ flex: 1 }}>
@@ -345,8 +345,8 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               fontWeight: 700,
               color: primary,
             }}>
-              <div style={{ flex: 1, textAlign: 'center' }}>PAN NO.</div>
-              <div style={{ flex: 1, textAlign: 'center' }}>{donor['PAN No.'] || 'NA'}</div>
+              <div style={{ flex: 1, textAlign: 'center', marginBottom: '20px' }}>PAN NO.</div>
+              <div style={{ flex: 1, textAlign: 'center', marginBottom: '20px' }}>{donor['PAN No.'] || 'NA'}</div>
             </div>
           </div>
         </div>
@@ -354,7 +354,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
         {/* Middle Section: 80G + Donation Info + Signature */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div style={{ fontSize: '80px', fontWeight: 900, color: primary, lineHeight: 1 }}>80G</div>
+            <div style={{ fontSize: '80px', fontWeight: 900, color: primary, lineHeight: 1, marginBottom: '60px' }}>80G</div>
             <div style={{
               width: '320px',
               padding: '15px',
@@ -375,7 +375,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
             <img
               src={ashrayStamp}
               alt="Stamp"
-              style={{ width: '120px', marginBottom: '10px' , marginLeft: '60px', }}
+              style={{ width: '120px', marginBottom: '10px', marginLeft: '60px', }}
             />
             <div style={{ fontSize: '17px', fontWeight: 700, color: primary }}>Authorised Sign.</div>
             <div style={{ fontSize: '18px', fontWeight: 800, color: dark }}>{org.name}.</div>

@@ -189,7 +189,12 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
               </div>
               <div style={{ padding: '5px 10px', borderBottom: `1px solid ${PALE}`, borderRight: `1px solid ${PALE}` }}>
                 <div style={{ fontSize: '7px', textTransform: 'uppercase', letterSpacing: '0.8px', color: SOFT, marginBottom: '1px' }}>Address</div>
-                <div style={{ fontSize: '9.5px', fontWeight: 600, color: DARK }}>{donor['Address 1'] || 'NA'}</div>
+                <div style={{ fontSize: '9.5px', fontWeight: 600, color: DARK }}>
+                  {donor['Address 1'] || 'NA'}
+                  {[donor['City'], donor['State'], donor['Pincode']].some(Boolean) && (
+                    <><br />{donor['City']}{donor['City'] && donor['State'] ? ', ' : ''}{donor['State']}{donor['State'] && donor['Pincode'] ? ' - ' : ''}{donor['Pincode']}</>
+                  )}
+                </div>
               </div>
               <div style={{ padding: '5px 10px', borderBottom: `1px solid ${PALE}`, borderRight: 'none' }}>
                 <div style={{ fontSize: '7px', textTransform: 'uppercase', letterSpacing: '0.8px', color: SOFT, marginBottom: '1px' }}>On Account Of</div>
