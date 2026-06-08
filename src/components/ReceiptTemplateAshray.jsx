@@ -213,7 +213,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               width: '170px',
             }}
           >
-            {donor['City'] || ''}
+            {donor['City'] || 'NA'}
           </div>
           <div style={{ width: '20px' }} />
           <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>State:</span>
@@ -227,7 +227,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               width: '170px',
             }}
           >
-            {donor['State'] || ''}
+            {donor['State'] || 'NA'}
           </div>
           <div style={{ width: '20px' }} />
           <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Pin Code:</span>
@@ -241,7 +241,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               width: '187px',
             }}
           >
-            {donor['Pincode'] || ''}
+            {donor['Pincode'] || 'NA'}
           </div>
         </div>
 
