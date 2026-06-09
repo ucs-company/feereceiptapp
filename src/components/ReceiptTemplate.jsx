@@ -4,6 +4,7 @@ import {
   getFormattedDate,
 } from '../services/pdfGenerator'
 import defaultSignature from '../../stamp.png'
+import MancareLogo from '../../MAANCareLogo.jpeg'
 
 export default function ReceiptTemplate({ donor, index, signature }) {
   const formattedDate = getFormattedDate()
@@ -85,22 +86,17 @@ export default function ReceiptTemplate({ donor, index, signature }) {
         </div>
 
         <div style={{ width: '42%', textAlign: 'right' }}>
-          <div
+          <img
+            src={MancareLogo}
+            alt="Mann Care Foundation"
             style={{
-              background: '#e4008d',
-              color: '#fff',
-              display: 'inline-block',
-              padding: '15px 25px',
-              fontSize: '42px',
-              fontWeight: 'bold',
+              width: '200px',
+              height: 'auto',
+              display: 'block',
+              marginLeft: 'auto',
               marginBottom: '10px',
             }}
-          >
-            MANN
-          </div>
-          <div style={{ color: '#d10087', fontSize: '34px', fontWeight: 'bold', marginBottom: '10px' }}>
-            Mann Care Foundation
-          </div>
+          />
           <div style={{ color: '#d10087', lineHeight: '1.8', fontSize: '18px' }}>
             {/* 80G Registration <br /> */}
             CIN No : U88900MH2026NPL471199<br />
