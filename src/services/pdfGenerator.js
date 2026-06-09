@@ -108,7 +108,7 @@ function getFilePrefix(project) {
   const map = {
     ashray: 'Ashray',
     beingsevak: 'BeingSevak',
-    manncar: 'Manncar',
+    manncar: 'MannCare',
   }
   return (map[project] || project) + '_'
 }
