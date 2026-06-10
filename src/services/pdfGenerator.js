@@ -75,10 +75,7 @@ function parseMonthName(s) {
   return -1
 }
 
-export function formatReceiptDate(dateStr) {
-  if (!dateStr || String(dateStr).trim() === '') return getFormattedDate()
-  const raw = String(dateStr).trim()
-
+function parseAndFormat(raw) {
   let parts = raw.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})$/)
   if (parts) {
     let [, d, m, y] = parts
@@ -87,7 +84,7 @@ export function formatReceiptDate(dateStr) {
     const month = parseInt(m, 10)
     const year = parseInt(y, 10)
     if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-      return `${day}-${MONTHS_SHORT[month - 1]}-${year}`
+      return formatDateFromParts(day, month, year)
     }
   }
 
@@ -99,13 +96,71 @@ export function formatReceiptDate(dateStr) {
     const month = parseMonthName(m)
     const year = parseInt(y, 10)
     if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-      return `${day}-${MONTHS_SHORT[month - 1]}-${year}`
+      return formatDateFromParts(day, month, year)
     }
   }
 
+  parts = raw.match(/^(\d{1,2})[ ](\d{1,2}|[A-Za-z]{3,})[ ](\d{2,4})$/)
+  if (parts) {
+    let [, d, m, y] = parts
+    if (y.length === 2) y = '20' + y
+    const day = parseInt(d, 10)
+    const monthNum = parseInt(m, 10)
+    if (!isNaN(monthNum) && monthNum >= 1 && monthNum <= 12 && day >= 1 && day <= 31) {
+      return formatDateFromParts(day, monthNum, year)
+    }
+    const monthName = parseMonthName(m)
+    if (monthName >= 1 && monthName <= 12 && day >= 1 && day <= 31) {
+      return formatDateFromParts(day, monthName, year)
+    }
+  }
+
+  return null
+}
+
+function formatDateFromParts(day, month, year) {
+  const shortYear = String(year).slice(-2)
+  return `${day}-${MONTHS_SHORT[month - 1]}-${shortYear}`
+}
+
+export function formatReceiptDate(dateStr) {
+  if (!dateStr || String(dateStr).trim() === '') return getFormattedDate()
+
+  if (dateStr instanceof Date) {
+    const d = dateStr
+    const sy = String(d.getUTCFullYear()).slice(-2)
+    return `${d.getUTCDate()}-${MONTHS_SHORT[d.getUTCMonth()]}-${sy}`
+  }
+
+  if (typeof dateStr === 'number') {
+    const d = new Date((dateStr - 25569) * 86400000)
+    if (!isNaN(d.getTime())) {
+      const sy = String(d.getUTCFullYear()).slice(-2)
+      return `${d.getUTCDate()}-${MONTHS_SHORT[d.getUTCMonth()]}-${sy}`
+    }
+  }
+
+  const raw = String(dateStr).trim()
+
+  const numeric = raw.replace(/[, ]/g, '')
+  if (/^\d{5}$/.test(numeric)) {
+    const d = new Date((parseInt(numeric, 10) - 25569) * 86400000)
+    if (!isNaN(d.getTime())) {
+      const sy = String(d.getUTCFullYear()).slice(-2)
+      return `${d.getUTCDate()}-${MONTHS_SHORT[d.getUTCMonth()]}-${sy}`
+    }
+  }
+
+  const result = parseAndFormat(raw)
+  if (result) return result
+
   const d = new Date(raw)
-  if (isNaN(d.getTime())) return raw
-  return `${d.getDate()}-${MONTHS_SHORT[d.getMonth()]}-${d.getFullYear()}`
+  if (!isNaN(d.getTime())) {
+    const sy = String(d.getFullYear()).slice(-2)
+    return `${d.getDate()}-${MONTHS_SHORT[d.getMonth()]}-${sy}`
+  }
+
+  return raw
 }
 
 export async function generateReceiptPDF(element) {

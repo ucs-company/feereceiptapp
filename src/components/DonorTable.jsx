@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { formatIndianCurrency } from '../services/pdfGenerator'
+import { formatIndianCurrency, formatReceiptDate } from '../services/pdfGenerator'
 
 const PAGE_SIZE = 20
 
@@ -113,6 +113,13 @@ export default function DonorTable({ donors, selectedIndex, onSelect }) {
                       return (
                         <td key={h.key} className="px-3 py-3 font-medium text-gray-900 max-w-[200px] truncate whitespace-nowrap">
                           {val}
+                        </td>
+                      )
+                    }
+                    if (h.key === 'Receipt Date') {
+                      return (
+                        <td key={h.key} className="px-3 py-3 text-gray-500 whitespace-nowrap">
+                          {formatReceiptDate(val)}
                         </td>
                       )
                     }

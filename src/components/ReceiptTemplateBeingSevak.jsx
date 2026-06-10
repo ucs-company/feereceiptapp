@@ -448,10 +448,10 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
               <span style={{ marginLeft: 'auto', fontWeight: 700, }}>PAN NO:</span>
               <span style={{ fontWeight: 700, color: '#222' }}>{donor['PAN No.'] || 'NA'}</span>
             </div>
-            <div style={{ fontSize: '15px', color: '#555', marginTop: '5px' ,textAlign: 'center', marginTop : '25px'}}>Donation Payment is Subject to Realisation</div>
+            <div style={{ fontSize: '15px', color: '#555', textAlign: 'center', marginTop : '25px'}}>Donation Payment is Subject to Realisation</div>
             {/* <div style={{ fontSize: '11px', color: '#555', marginTop: '5px' }}>Email ID: &nbsp;<span>{donor['Email ID'] || 'NA'}</span></div> */}
             {/* <div style={{ fontSize: '11px', color: '#555', marginTop: '5px', fontWeight: 400 }}>Subject to Mumbai Jurisdiction</div> */}
-            <div style={{ fontSize: '15px', color: '#555', marginTop: '5px' ,textAlign: 'center', marginTop : '5px' }}>****This is system generated auto receipt****</div>
+            <div style={{ fontSize: '15px', color: '#555', textAlign: 'center', marginTop : '5px' }}>****This is system generated auto receipt****</div>
           </div>
           <div style={{ width: '180px', border: `2px solid ${ACCENT}`, borderRadius: '8px', textAlign: 'center', padding: '10px', background: '#f9fdff' }}>
             <img src={signature || beingSevakStamp} alt="Seal" style={{ width: '85px', marginLeft: '34px' }} />

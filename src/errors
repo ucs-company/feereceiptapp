@@ -1,0 +1,41 @@
+12
+chunk-JHSVYIJ7.js?v=14eb9ae5:9981 Uncaught Error: Objects are not valid as a React child (found: [object Date]). If you meant to render a collection of children, use an array instead.
+    at throwOnInvalidObjectType (chunk-JHSVYIJ7.js?v=14eb9ae5:9981:17)
+    at reconcileChildFibers2 (chunk-JHSVYIJ7.js?v=14eb9ae5:10611:15)
+    at reconcileChildren (chunk-JHSVYIJ7.js?v=14eb9ae5:14338:37)
+    at updateHostComponent (chunk-JHSVYIJ7.js?v=14eb9ae5:14855:11)
+    at beginWork (chunk-JHSVYIJ7.js?v=14eb9ae5:15983:22)
+    at HTMLUnknownElement.callCallback2 (chunk-JHSVYIJ7.js?v=14eb9ae5:3680:22)
+    at Object.invokeGuardedCallbackDev (chunk-JHSVYIJ7.js?v=14eb9ae5:3705:24)
+    at invokeGuardedCallback (chunk-JHSVYIJ7.js?v=14eb9ae5:3739:39)
+    at beginWork$1 (chunk-JHSVYIJ7.js?v=14eb9ae5:19818:15)
+    at performUnitOfWork (chunk-JHSVYIJ7.js?v=14eb9ae5:19251:20)
+6
+chunk-JHSVYIJ7.js?v=14eb9ae5:14080 The above error occurred in the <td> component:
+
+    at td
+    at tr
+    at tbody
+    at table
+    at div
+    at div
+    at DonorTable (http://localhost:5174/src/components/DonorTable.jsx?t=1781072023352:34:38)
+    at div
+    at main
+    at div
+    at App (http://localhost:5174/src/App.jsx?t=1781072023352:25:31)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+chunk-JHSVYIJ7.js?v=14eb9ae5:19466 Uncaught Error: Objects are not valid as a React child (found: [object Date]). If you meant to render a collection of children, use an array instead.
+    at throwOnInvalidObjectType (chunk-JHSVYIJ7.js?v=14eb9ae5:9981:17)
+    at reconcileChildFibers2 (chunk-JHSVYIJ7.js?v=14eb9ae5:10611:15)
+    at reconcileChildren (chunk-JHSVYIJ7.js?v=14eb9ae5:14338:37)
+    at updateHostComponent (chunk-JHSVYIJ7.js?v=14eb9ae5:14855:11)
+    at beginWork (chunk-JHSVYIJ7.js?v=14eb9ae5:15983:22)
+    at beginWork$1 (chunk-JHSVYIJ7.js?v=14eb9ae5:19806:22)
+    at performUnitOfWork (chunk-JHSVYIJ7.js?v=14eb9ae5:19251:20)
+    at workLoopSync (chunk-JHSVYIJ7.js?v=14eb9ae5:19190:13)
+    at renderRootSync (chunk-JHSVYIJ7.js?v=14eb9ae5:19169:15)
+    at recoverFromConcurrentError (chunk-JHSVYIJ7.js?v=14eb9ae5:18786:28)
+
