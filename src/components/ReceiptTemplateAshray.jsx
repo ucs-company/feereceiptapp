@@ -199,52 +199,16 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               borderBottom: `2px solid ${secondary}`,
             }}
           >
-            {donor['Address 1'] || 'NA'}
-          </div>
-        </div>
-
-        {/* City / State / Pin Code */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '18px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>City:</span>
-          <div
-            style={{
-              minHeight: '28px',
-              padding: '4px 8px',
-              color: '#222',
-              fontWeight: 600,
-              borderBottom: `2px solid ${secondary}`,
-              width: '170px',
-            }}
-          >
-            {donor['City'] || 'NA'}
-          </div>
-          <div style={{ width: '20px' }} />
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>State:</span>
-          <div
-            style={{
-              minHeight: '28px',
-              padding: '4px 8px',
-              color: '#222',
-              fontWeight: 600,
-              borderBottom: `2px solid ${secondary}`,
-              width: '170px',
-            }}
-          >
-            {donor['State'] || 'NA'}
-          </div>
-          <div style={{ width: '20px' }} />
-          <span style={{ fontWeight: 700, color: dark, marginRight: '8px', marginBottom: '5px' }}>Pin Code:</span>
-          <div
-            style={{
-              minHeight: '28px',
-              padding: '4px 8px',
-              color: '#222',
-              fontWeight: 600,
-              borderBottom: `2px solid ${secondary}`,
-              width: '187px',
-            }}
-          >
-            {donor['Pincode'] || 'NA'}
+            {donor['Address 1'] || 'NA'}{donor['Address 1'] && [donor['City'], donor['State'], donor['Pincode']].some(Boolean) ? ', ' : ''}
+            {[donor['City'], donor['State'], donor['Pincode']].some(Boolean) && (
+              <>
+                {donor['City']}
+                {donor['City'] && donor['State'] ? ', ' : ''}
+                {donor['State']}
+                {donor['State'] && donor['Pincode'] ? ' - ' : ''}
+                {donor['Pincode']}
+              </>
+            )}
           </div>
         </div>
 
