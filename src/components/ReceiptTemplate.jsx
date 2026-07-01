@@ -10,6 +10,10 @@ import MancareLogo from '../../MAANCareLogo.jpeg'
 export default function ReceiptTemplate({ donor, index, signature }) {
   const formattedDate = formatReceiptDate(donor['Receipt Date'])
   const amount = Number(donor['Amount']) || 0
+  const hasRealAddr = donor['Address 1'] && !['NA', 'N/A'].includes(donor['Address 1'].trim())
+  const cityState = [donor['City'], donor['State']].filter(Boolean).join(', ')
+  const pin = donor['Pincode']
+  const hasLocation = cityState || pin
 
   if (donor._dataMissing) {
     return (
@@ -77,10 +81,7 @@ export default function ReceiptTemplate({ donor, index, signature }) {
            Name : - {donor['Donor Name'].toUpperCase()}
           </span>
           <br />
-        Address. - {donor['Address 1']}<br />
-          {[donor['City'], donor['State'], donor['Pincode']].some(Boolean) && (
-            <>{donor['City']}{donor['City'] && donor['State'] ? ', ' : ''}{donor['State']}{donor['State'] && donor['Pincode'] ? ' - ' : ''}{donor['Pincode']}<br /></>
-          )}
+        Address. - {hasRealAddr ? <>{donor['Address 1']}<br />{hasLocation ? <>{cityState}{cityState && pin ? ' - ' : ''}{pin}<br /></> : null}</> : 'NA'}
           PAN No. - {donor['PAN No.']}
           <br />
           Email - {donor['Email ID']}

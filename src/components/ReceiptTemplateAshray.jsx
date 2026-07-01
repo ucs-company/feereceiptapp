@@ -52,6 +52,10 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
   const formattedDate = formatReceiptDate(donor['Receipt Date'])
   const amount = Number(donor['Amount']) || 0
   const org = ORG[project] || ORG.ashray
+  const hasRealAddr = donor['Address 1'] && !['NA', 'N/A'].includes(donor['Address 1'].trim())
+  const cityState = [donor['City'], donor['State']].filter(Boolean).join(', ')
+  const pin = donor['Pincode']
+  const hasLocation = cityState || pin
 
 
 
@@ -199,16 +203,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
               borderBottom: `2px solid ${secondary}`,
             }}
           >
-            {donor['Address 1'] || 'NA'}{donor['Address 1'] && [donor['City'], donor['State'], donor['Pincode']].some(Boolean) ? ', ' : ''}
-            {[donor['City'], donor['State'], donor['Pincode']].some(Boolean) && (
-              <>
-                {donor['City']}
-                {donor['City'] && donor['State'] ? ', ' : ''}
-                {donor['State']}
-                {donor['State'] && donor['Pincode'] ? ' - ' : ''}
-                {donor['Pincode']}
-              </>
-            )}
+            {hasRealAddr ? <>{donor['Address 1']}{hasLocation ? ', ' : ''}{hasLocation ? <>{cityState}{cityState && pin ? ' - ' : ''}{pin}</> : null}</> : 'NA'}
           </div>
         </div>
 
