@@ -81,7 +81,7 @@ export default function ReceiptTemplate({ donor, index, signature }) {
            Name : - {donor['Donor Name'].toUpperCase()}
           </span>
           <br />
-        Address. - {hasRealAddr ? <>{donor['Address 1']}<br />{hasLocation ? <>{cityState}{cityState && pin ? ' - ' : ''}{pin}<br /></> : null}</> : 'NA'}
+        Address. - {hasRealAddr ? <>{donor['Address 1']}<br />{hasLocation ? <>{cityState}{cityState && pin ? ' - ' : ''}{pin}<br /></> : null}</> : <>NA<br /></>}
           PAN No. - {donor['PAN No.']}
           <br />
           Email - {donor['Email ID']}
