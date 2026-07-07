@@ -13,7 +13,7 @@ export default function Toast({ message, type, visible, onClose }) {
     ? 'bg-emerald-600'
     : type === 'error'
     ? 'bg-red-600'
-    : 'bg-gray-800'
+    : 'bg-blue-600'
 
   const icon = type === 'success' ? (
     <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -23,7 +23,11 @@ export default function Toast({ message, type, visible, onClose }) {
     <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
-  ) : null
+  ) : (
+    <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
 
   return (
     <div className="fixed top-5 right-5 z-50 animate-slideUp">

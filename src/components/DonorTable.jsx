@@ -17,10 +17,17 @@ const HEADERS = [
   { key: 'Account Of', label: 'Account Of' },
 ]
 
-export default function DonorTable({ donors, selectedIndex, onSelect, onSendWhatsApp, showToast }) {
+export default function DonorTable({ donors, selectedIndex, onSelect, onSendWhatsApp, showToast, onSendAll, bulkSending, bulkSent, bulkFailed, bulkTotal }) {
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(0)
   const [sendingIndex, setSendingIndex] = useState(null)
+
+  const validCount = useMemo(() => {
+    return donors.filter((d) => {
+      const mobile = String(d['Mobile No.'] || '').replace(/[^0-9]/g, '')
+      return mobile.length >= 10
+    }).length
+  }, [donors])
 
   const filtered = useMemo(() => {
     if (!search.trim()) return donors
@@ -74,6 +81,34 @@ export default function DonorTable({ donors, selectedIndex, onSelect, onSendWhat
             className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:border-[#d10087]/40 focus:ring-2 focus:ring-[#d10087]/20 focus:outline-none transition-all duration-300"
           />
         </div>
+        <button
+          onClick={onSendAll}
+          disabled={bulkSending || validCount === 0}
+          className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg shadow-sm active:scale-[0.97] transition-all duration-200 ${
+            bulkSending
+              ? 'bg-emerald-500 text-white cursor-not-allowed'
+              : validCount > 0
+              ? 'bg-emerald-600 text-white hover:bg-emerald-500 hover:shadow-md'
+              : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+          }`}
+        >
+          {bulkSending ? (
+            <>
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              {bulkSent + bulkFailed}/{bulkTotal}
+            </>
+          ) : (
+            <>
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Send All ({validCount})
+            </>
+          )}
+        </button>
       </div>
 
       <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">

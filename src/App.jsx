@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react'
 import ExcelUpload from './components/ExcelUpload'
 import DonorTable from './components/DonorTable'
 import ReceiptPreview from './components/ReceiptPreview'
+import BulkProgressModal from './components/BulkProgressModal'
 import Toast from './components/Toast'
 import { PROJECTS, PROJECT_OPTIONS } from './data/projects'
 import { formatIndianCurrency, formatReceiptDate } from './services/pdfGenerator'
@@ -12,6 +13,18 @@ export default function App() {
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [project, setProject] = useState('manncar')
   const [toast, setToast] = useState({ message: '', type: '', visible: false })
+
+  const [bulkState, setBulkState] = useState({
+    active: false,
+    total: 0,
+    sent: 0,
+    failed: 0,
+    currentBatch: 0,
+    totalBatches: 0,
+    results: [],
+    previousBatches: [],
+  })
+  const cancelBulkRef = useRef(false)
 
   const showToast = useCallback((type, message) => {
     setToast({ type, message, visible: true })
@@ -43,6 +56,98 @@ export default function App() {
     const date = formatReceiptDate(donor['Receipt Date'])
     await sendReceiptViaWhatsApp(donor, amount, date, project, currentProject.label, receiptRef.current)
   }, [project, currentProject.label])
+
+  const handleSendAllWhatsApp = useCallback(async () => {
+    const validDonors = donors.filter((d) => {
+      const mobile = String(d['Mobile No.'] || '').replace(/[^0-9]/g, '')
+      return mobile.length >= 10
+    })
+
+    if (validDonors.length === 0) {
+      showToast('error', 'No donors with valid mobile numbers')
+      return
+    }
+
+    const batches = []
+    for (let i = 0; i < validDonors.length; i += 10) {
+      batches.push(validDonors.slice(i, i + 10))
+    }
+
+    cancelBulkRef.current = false
+
+    setBulkState({
+      active: true,
+      total: validDonors.length,
+      sent: 0,
+      failed: 0,
+      currentBatch: 0,
+      totalBatches: batches.length,
+      results: [],
+      previousBatches: [],
+    })
+
+    let totalSent = 0
+    let totalFailed = 0
+
+    for (let batchIdx = 0; batchIdx < batches.length; batchIdx++) {
+      if (cancelBulkRef.current) break
+
+      const batch = batches[batchIdx]
+
+      setBulkState((prev) => ({
+        ...prev,
+        currentBatch: batchIdx + 1,
+        results: batch.map((d) => ({ name: d['Donor Name'], status: 'sending' })),
+      }))
+
+      const batchResults = await Promise.allSettled(
+        batch.map(async (donor) => {
+          const realIndex = donors.indexOf(donor)
+          const batchElement = document.querySelector(`[data-receipt-batch="${realIndex}"]`)
+          if (!batchElement) throw new Error('Receipt element not found')
+
+          const amount = formatIndianCurrency(donor['Amount'])
+          const date = formatReceiptDate(donor['Receipt Date'])
+          await sendReceiptViaWhatsApp(donor, amount, date, project, currentProject.label, batchElement)
+        })
+      )
+
+      const batchSent = batchResults.filter((r) => r.status === 'fulfilled').length
+      const batchFailed = batchResults.filter((r) => r.status === 'rejected').length
+      totalSent += batchSent
+      totalFailed += batchFailed
+
+      const batchResultItems = batchResults.map((r, i) => ({
+        name: batch[i]['Donor Name'],
+        status: r.status === 'fulfilled' ? 'sent' : 'failed',
+        error: r.status === 'rejected' ? r.reason?.message : null,
+      }))
+
+      setBulkState((prev) => ({
+        ...prev,
+        sent: totalSent,
+        failed: totalFailed,
+        results: batchResultItems,
+        previousBatches: [
+          ...prev.previousBatches,
+          { batch: batchIdx + 1, sent: batchSent, failed: batchFailed },
+        ],
+      }))
+    }
+
+    setBulkState((prev) => ({ ...prev, active: false }))
+
+    if (cancelBulkRef.current) {
+      showToast('info', `Cancelled. ${totalSent} sent, ${totalFailed} failed`)
+    } else {
+      showToast('success', `Bulk send complete! ${totalSent} sent, ${totalFailed} failed`)
+    }
+  }, [donors, project, currentProject.label, showToast])
+
+  const handleCancelBulk = useCallback(() => {
+    cancelBulkRef.current = true
+    setBulkState((prev) => ({ ...prev, cancelled: true }))
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -112,6 +217,11 @@ export default function App() {
               onSelect={handleSelect}
               onSendWhatsApp={handleSendWhatsApp}
               showToast={showToast}
+              onSendAll={handleSendAllWhatsApp}
+              bulkSending={bulkState.active}
+              bulkSent={bulkState.sent}
+              bulkFailed={bulkState.failed}
+              bulkTotal={bulkState.total}
             />
           </div>
         )}
@@ -125,6 +235,17 @@ export default function App() {
           />
         </div>
       </main>
+      <BulkProgressModal
+        visible={bulkState.active}
+        total={bulkState.total}
+        sent={bulkState.sent}
+        failed={bulkState.failed}
+        currentBatch={bulkState.currentBatch}
+        totalBatches={bulkState.totalBatches}
+        results={bulkState.results}
+        previousBatches={bulkState.previousBatches}
+        onCancel={handleCancelBulk}
+      />
       <Toast message={toast.message} type={toast.type} visible={toast.visible} onClose={hideToast} />
     </div>
   )
