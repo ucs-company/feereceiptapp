@@ -3,6 +3,7 @@ import ExcelUpload from './components/ExcelUpload'
 import DonorTable from './components/DonorTable'
 import ReceiptPreview from './components/ReceiptPreview'
 import BulkProgressModal from './components/BulkProgressModal'
+import ConfirmBulkModal from './components/ConfirmBulkModal'
 import Toast from './components/Toast'
 import { PROJECTS, PROJECT_OPTIONS } from './data/projects'
 import { formatIndianCurrency, formatReceiptDate } from './services/pdfGenerator'
@@ -25,6 +26,11 @@ export default function App() {
     previousBatches: [],
   })
   const cancelBulkRef = useRef(false)
+
+  const [confirmBulk, setConfirmBulk] = useState({
+    visible: false,
+    donorCount: 0,
+  })
 
   const showToast = useCallback((type, message) => {
     setToast({ type, message, visible: true })
@@ -57,16 +63,31 @@ export default function App() {
     await sendReceiptViaWhatsApp(donor, amount, date, project, currentProject.label, receiptRef.current)
   }, [project, currentProject.label])
 
-  const handleSendAllWhatsApp = useCallback(async () => {
-    const validDonors = donors.filter((d) => {
+  const getValidDonors = useCallback(() => {
+    return donors.filter((d) => {
       const mobile = String(d['Mobile No.'] || '').replace(/[^0-9]/g, '')
       return mobile.length >= 10
     })
+  }, [donors])
 
+  const handleSendAllWhatsApp = useCallback(() => {
+    const validDonors = getValidDonors()
     if (validDonors.length === 0) {
       showToast('error', 'No donors with valid mobile numbers')
       return
     }
+    setConfirmBulk({ visible: true, donorCount: validDonors.length })
+  }, [getValidDonors, showToast])
+
+  const handleCancelConfirm = useCallback(() => {
+    setConfirmBulk({ visible: false, donorCount: 0 })
+  }, [])
+
+  const handleConfirmBulkSend = useCallback(async () => {
+    setConfirmBulk({ visible: false, donorCount: 0 })
+
+    const validDonors = getValidDonors()
+    if (validDonors.length === 0) return
 
     const batches = []
     for (let i = 0; i < validDonors.length; i += 10) {
@@ -142,7 +163,7 @@ export default function App() {
     } else {
       showToast('success', `Bulk send complete! ${totalSent} sent, ${totalFailed} failed`)
     }
-  }, [donors, project, currentProject.label, showToast])
+  }, [getValidDonors, donors, project, currentProject.label, showToast])
 
   const handleCancelBulk = useCallback(() => {
     cancelBulkRef.current = true
@@ -235,6 +256,13 @@ export default function App() {
           />
         </div>
       </main>
+      <ConfirmBulkModal
+        visible={confirmBulk.visible}
+        donorCount={confirmBulk.donorCount}
+        projectName={currentProject.label}
+        onConfirm={handleConfirmBulkSend}
+        onCancel={handleCancelConfirm}
+      />
       <BulkProgressModal
         visible={bulkState.active}
         total={bulkState.total}
