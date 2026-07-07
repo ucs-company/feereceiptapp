@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import { formatIndianCurrency, formatReceiptDate } from '../services/pdfGenerator'
 
 const PAGE_SIZE = 20
@@ -17,9 +17,10 @@ const HEADERS = [
   { key: 'Account Of', label: 'Account Of' },
 ]
 
-export default function DonorTable({ donors, selectedIndex, onSelect }) {
+export default function DonorTable({ donors, selectedIndex, onSelect, onSendWhatsApp, showToast }) {
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(0)
+  const [sendingIndex, setSendingIndex] = useState(null)
 
   const filtered = useMemo(() => {
     if (!search.trim()) return donors
@@ -39,6 +40,17 @@ export default function DonorTable({ donors, selectedIndex, onSelect }) {
     setSearch(e.target.value)
     setPage(0)
   }
+
+  const handleWhatsApp = useCallback(async (index) => {
+    setSendingIndex(index)
+    try {
+      await onSendWhatsApp(donors[index], index)
+      showToast('success', `WhatsApp sent to ${donors[index]['Donor Name']}`)
+    } catch (err) {
+      showToast('error', err.message)
+    }
+    setSendingIndex(null)
+  }, [donors, onSendWhatsApp, showToast])
 
   if (!donors || donors.length === 0) return null
 
@@ -143,15 +155,38 @@ export default function DonorTable({ donors, selectedIndex, onSelect }) {
                     )}
                   </td>
                   <td className="px-3 py-3 text-center whitespace-nowrap">
-                    <button
-                      onClick={() => onSelect(realIndex)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#d10087]/5 text-[#d10087] font-medium text-xs rounded-lg hover:bg-[#d10087]/10 hover:shadow-sm transition-all duration-200"
-                    >
-                      Preview
-                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                    <div className="flex items-center justify-center gap-1">
+                      <button
+                        onClick={() => onSelect(realIndex)}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#d10087]/5 text-[#d10087] font-medium text-xs rounded-lg hover:bg-[#d10087]/10 hover:shadow-sm transition-all duration-200"
+                      >
+                        Preview
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => handleWhatsApp(realIndex)}
+                        disabled={!donor['Mobile No.'] || sendingIndex === realIndex}
+                        className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+                          donor['Mobile No.']
+                            ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:shadow-sm'
+                            : 'bg-gray-50 text-gray-300 cursor-not-allowed'
+                        }`}
+                      >
+                        {sendingIndex === realIndex ? (
+                          <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                          </svg>
+                        ) : (
+                          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        )}
+                        {donor['Mobile No.'] ? 'WhatsApp' : 'No Phone'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               )

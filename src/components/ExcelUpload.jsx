@@ -13,6 +13,7 @@ const TARGET_COLUMNS = [
   { key: 'Receipt No.', aliases: ['Receipt No.', 'Receipt No', 'Reciept No', 'Reciept No.'] },
   { key: 'Receipt Date', aliases: ['Receipt Date', 'Reciept Date', 'Donation Date', 'Reciept date', 'Receipt date', 'receipt date'] },
   { key: 'Account Of', aliases: ['Account Of', 'Account of', 'Account of '] },
+  { key: 'Mobile No.', aliases: ['Mobile No.', 'Mobile', 'Phone', 'Phone No.', 'Contact No.', 'Cell'] },
 ]
 
 const MANDATORY = ['Donor Name', 'Amount', 'Receipt No.']

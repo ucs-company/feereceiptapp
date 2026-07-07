@@ -173,10 +173,20 @@ export async function generateReceiptPDF(element) {
     logging: false,
     width: 1000,
     onclone: (doc) => {
-      let el = doc.querySelector('[data-receipt-batch]')
-      if (!el) el = doc.querySelector('[data-receipt]')
-      if (el) {
-        let p = el.parentElement
+      const batchElements = doc.querySelectorAll('[data-receipt-batch]')
+      let targetEl = null
+      const originalBatch = element.dataset.receiptBatch
+      if (originalBatch) {
+        for (const el of batchElements) {
+          if (el.dataset.receiptBatch === originalBatch) {
+            targetEl = el
+            break
+          }
+        }
+      }
+      targetEl = targetEl || batchElements[0] || doc.querySelector('[data-receipt]')
+      if (targetEl) {
+        let p = targetEl.parentElement
         while (p) {
           if (p.style.display === 'none') {
             p.style.display = 'block'

@@ -1,18 +1,32 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import ExcelUpload from './components/ExcelUpload'
 import DonorTable from './components/DonorTable'
 import ReceiptPreview from './components/ReceiptPreview'
+import Toast from './components/Toast'
 import { PROJECTS, PROJECT_OPTIONS } from './data/projects'
+import { formatIndianCurrency, formatReceiptDate } from './services/pdfGenerator'
+import { sendReceiptViaWhatsApp } from './services/whatsapp'
 
 export default function App() {
   const [donors, setDonors] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [project, setProject] = useState('manncar')
+  const [toast, setToast] = useState({ message: '', type: '', visible: false })
+
+  const showToast = useCallback((type, message) => {
+    setToast({ type, message, visible: true })
+  }, [])
+
+  const hideToast = useCallback(() => {
+    setToast((prev) => ({ ...prev, visible: false }))
+  }, [])
 
   const handleDataLoaded = useCallback((data) => {
     setDonors(data)
     setSelectedIndex(null)
   }, [])
+
+  const receiptRef = useRef(null)
 
   const handleSelect = useCallback((index) => {
     setSelectedIndex(index)
@@ -23,6 +37,12 @@ export default function App() {
   }, [])
 
   const currentProject = PROJECTS[project]
+
+  const handleSendWhatsApp = useCallback(async (donor, index) => {
+    const amount = formatIndianCurrency(donor['Amount'])
+    const date = formatReceiptDate(donor['Receipt Date'])
+    await sendReceiptViaWhatsApp(donor, amount, date, project, currentProject.label, receiptRef.current)
+  }, [project, currentProject.label])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -90,6 +110,8 @@ export default function App() {
               donors={donors}
               selectedIndex={selectedIndex}
               onSelect={handleSelect}
+              onSendWhatsApp={handleSendWhatsApp}
+              showToast={showToast}
             />
           </div>
         )}
@@ -99,9 +121,11 @@ export default function App() {
             donors={donors}
             selectedIndex={selectedIndex}
             project={project}
+            receiptRef={receiptRef}
           />
         </div>
       </main>
+      <Toast message={toast.message} type={toast.type} visible={toast.visible} onClose={hideToast} />
     </div>
   )
 }

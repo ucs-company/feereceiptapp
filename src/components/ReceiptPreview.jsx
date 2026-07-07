@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import ReceiptTemplate from './ReceiptTemplate'
 import ReceiptTemplateAshray from './ReceiptTemplateAshray'
 import ReceiptTemplateBeingSevak from './ReceiptTemplateBeingSevak'
 import { PROJECTS } from '../data/projects'
 import { downloadAllPDFs as downloadAll, downloadSinglePDF } from '../services/pdfGenerator'
 
-export default function ReceiptPreview({ donors, selectedIndex, signature, project }) {
-  const receiptRef = useRef(null)
+export default function ReceiptPreview({ donors, selectedIndex, signature, project, receiptRef }) {
   const [downloadingSingle, setDownloadingSingle] = useState(false)
   const [downloadingAll, setDownloadingAll] = useState(false)
 
@@ -145,8 +144,8 @@ export default function ReceiptPreview({ donors, selectedIndex, signature, proje
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <div ref={receiptRef} data-receipt>
+      <div className="overflow-x-auto" style={{ textAlign: 'center' }}>
+        <div ref={receiptRef} data-receipt style={{ display: 'inline-block' }}>
           {project === 'manncar' ? (
             <ReceiptTemplate donor={currentDonor} index={currentIndex} signature={signature} />
           ) : project === 'beingsevak' ? (
@@ -159,7 +158,7 @@ export default function ReceiptPreview({ donors, selectedIndex, signature, proje
 
       <div style={{ display: 'none' }}>
         {donors.map((donor, i) => (
-          <div key={i} data-receipt-batch>
+          <div key={i} data-receipt-batch={i}>
             {project === 'manncar' ? (
               <ReceiptTemplate donor={donor} index={i} signature={signature} />
             ) : project === 'beingsevak' ? (
