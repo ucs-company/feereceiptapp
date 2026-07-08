@@ -55,7 +55,7 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
   }
 
   return (
-    <div style={{ width: '1000px', fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+    <div style={{ width: '1000px', fontFamily: "'Segoe UI', Arial, sans-serif", textAlign: 'left' }}>
       {/* ===== TOP SECTION: Thank You Letter ===== */}
       <div style={{ background: '#fff', border: `2px solid ${ACCENT}`, borderRadius: '10px', padding: '22px', marginBottom: '20px' }}>
 
@@ -92,7 +92,7 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
         </div>
 
         {/* Body */}
-        <div style={{ marginTop: '18px', fontSize: '14px', lineHeight: '1.7', color: '#222' }}>
+        <div style={{ marginTop: '18px', fontSize: '14px', lineHeight: '1.7', color: '#222', textAlign: 'left' }}>
           <p><strong>Name: &nbsp;&nbsp;<span>{donor['Donor Name']}</span></strong></p>
           <p>Dear Sir/Madam,</p>
           <p>
@@ -101,7 +101,7 @@ export default function ReceiptTemplateBeingSevak({ donor, index, signature }) {
               Rs. {formatAmount(amount)}
             </span>
             <strong style={{ fontWeight: 700, paddingBottom: '5px' }}>
-              {' '} {amountInWords(Math.floor(amount))} Rupees and No. Paise Only
+              {' '} {amountInWords(Math.floor(amount))} Rupees and No. Paise Only{' '}
             </strong>
             for a noble cause & making a difference.
           </p>
