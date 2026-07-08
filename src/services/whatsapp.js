@@ -51,7 +51,7 @@ export async function sendTemplateWithDocument(to, mediaId, fileName) {
       type: 'template',
       template: {
         name: 'bsct_receipt',
-        language: { code: 'en_US' },
+        language: { code: 'en' },
         components: [
           {
             type: 'header',
