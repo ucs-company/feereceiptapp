@@ -72,19 +72,13 @@ export default function ReceiptTemplate({ donor, index, signature }) {
 
       {/* Top Section */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div style={{ width: '50%', lineHeight: '1.6', fontSize: '16px' }}>
-          <b>Receipt No.:</b> {donor['Receipt No.']}
-          <br /><br />
-         Dated : {formattedDate}
-          <br /><br />
-          <span style={{ fontWeight: 'bold' }}>
-           Name : - {donor['Donor Name'].toUpperCase()}
-          </span>
-          <br />
-        Address. - {hasRealAddr ? <>{donor['Address 1']}<br />{hasLocation ? <>{cityState}{cityState && pin ? ' - ' : ''}{pin}<br /></> : null}</> : <>NA<br /></>}
-          PAN No. - {donor['PAN No.']}
-          <br />
-          Email - {donor['Email ID']}
+        <div style={{ width: '50%', lineHeight: '1.6', fontSize: '16px', textAlign: 'left' }}>
+          <div><b>Receipt No.:</b> {donor['Receipt No.']}</div>
+          <div style={{ marginTop: '4px' }}><b>Dated :</b> {formattedDate}</div>
+          <div style={{ marginTop: '4px' }}><b>Name :</b> {donor['Donor Name'].toUpperCase()}</div>
+          <div style={{ marginTop: '4px' }}><b>Address :</b> {hasRealAddr ? <>{donor['Address 1']}{hasLocation ? <>, {cityState}{cityState && pin ? ' - ' : ''}{pin}</> : null}</> : 'NA'}</div>
+          <div style={{ marginTop: '4px' }}><b>PAN No. :</b> {donor['PAN No.']}</div>
+          <div style={{ marginTop: '4px' }}><b>Email :</b> {donor['Email ID']}</div>
         </div>
 
         <div style={{ width: '42%', textAlign: 'right' }}>
@@ -132,41 +126,41 @@ export default function ReceiptTemplate({ donor, index, signature }) {
       >
         <tbody>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Donation Date</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{formattedDate}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Donation Date</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{formattedDate}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Transaction / Reference Number</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{donor['Payment ID No.']}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Transaction / Reference Number</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{donor['Payment ID No.']}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Payment Mode</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{donor['Mode of Payment (MOP)']}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Payment Mode</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{donor['Mode of Payment (MOP)']}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Bank Name</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{donor['Donor Bank Name']}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Bank Name</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{donor['Donor Bank Name']}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Email Address</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{donor['Email ID']}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Email Address</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{donor['Email ID']}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Account Of</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{donor['Account Of']}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Account Of</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{donor['Account Of']}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Total Contribution Received (Numbers)</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{formatIndianCurrency(amount)}</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Total Contribution Received (Numbers)</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{formatIndianCurrency(amount)}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>Total Contribution Received (Words)</td>
-            <td style={{ border: '1px solid #666', padding: '15px' }}>{amountInWords(amount)}{' '}Rupees and No.
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>Total Contribution Received (Words)</td>
+            <td style={{ border: '1px solid #666', padding: '15px', textAlign: 'left' }}>{amountInWords(amount)}{' '}Rupees and No.
               Paise Only</td>
           </tr>
         </tbody>
       </table>
-      <div style={{ marginTop: '35px', lineHeight: '1.7', fontSize: '18px' }}>
+      <div style={{ marginTop: '35px', lineHeight: '1.7', fontSize: '18px', textAlign: 'left' }}>
         Dear <strong>{donor['Donor Name'].toUpperCase()}</strong>
         <br /><br />
         Thank You for Your Generous Support {formatIndianCurrency(amount)} On behalf of Mann Care Foundation, we sincerely thank you for your valuable contribution. Your generosity helps us continue our mission of supporting those in need and creating a positive impact in the community.
@@ -177,20 +171,20 @@ export default function ReceiptTemplate({ donor, index, signature }) {
 
       {/* Signature Section */}
 
-      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'justify', }}>
+      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'left' }}>
         Donations to <span style={{ color: '#d10087', fontWeight: 'bold' }}>Mann Care Foundation</span> will qualify for deduction under Section 80G(5) of the Income Tax Act, 1961, subject to approval and registration under Section 80G by the Income Tax Department.
         This receipt is invalid in case of non-realization of the money instrument
         or reversal of the credit/debit card charge or reversal of donation amount
         for any reason. IT PAN : <span style={{ color: '#d10087', fontWeight: 'bold' }}>AAUCM9048B.</span>
       </div>
 
-      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'justify' }}>
+      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'left' }}>
         Please note that this is an acknowledgement for the receipt of donation.
         We will provide you the Form 10BE on which income-tax deduction can be
         claimed as per the income-tax rules Subject to Approval from income tax department.
       </div>
 
-      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px' }}>
+      <div style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '25px', textAlign: 'left' }}>
         This is a computer generated receipt. Incase of any discrepancy or queries please email{' '}
         <span style={{ color: '#d10087', fontWeight: 'bold' }}>manncarefoundation@gmail.com</span>
       </div>
