@@ -89,11 +89,10 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
     <div
       style={{
         width: '794px',
-        margin: '0 auto',
-        background: '#fff',
         overflow: 'hidden',
         border: `2px solid ${primary}`,
         fontFamily: "'Segoe UI', Arial, sans-serif",
+        background: '#fff',
       }}
     >
       {/* Header */}
@@ -111,7 +110,7 @@ export default function ReceiptTemplateAshray({ donor, index, signature, project
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-            <div style={{ fontSize: '13px', letterSpacing: '3px', opacity: 0.9 , marginRight : '190px' }}>{org.tagline}</div>
+            <div style={{ fontSize: '13px', letterSpacing: '3px', opacity: 0.9 }}>{org.tagline}</div>
           </div>
           <div style={{ fontSize: '30px', fontWeight: 800, margin: '5px 0', textAlign: 'left', paddingLeft: '20px' }}>{org.name}</div>
           <div style={{ fontSize: '11px', lineHeight: '1.6', textAlign: 'left', paddingLeft: '20px' }}>

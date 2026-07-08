@@ -171,7 +171,6 @@ export async function generateReceiptPDF(element) {
     scale: 1,
     useCORS: true,
     logging: false,
-    width: 1000,
     onclone: (doc) => {
       const batchElements = doc.querySelectorAll('[data-receipt-batch]')
       let targetEl = null
