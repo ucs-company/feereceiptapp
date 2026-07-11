@@ -1,8 +1,25 @@
 import { generateReceiptPDF } from './pdfGenerator'
 
-const PHONE_NUMBER_ID = import.meta.env.VITE_WHATSAPP_PHONE_NUMBER_ID
-const ACCESS_TOKEN = import.meta.env.VITE_WHATSAPP_ACCESS_TOKEN
 const API_BASE = 'https://graph.facebook.com/v23.0'
+
+const TEMPLATE_NAMES = {
+  manncar: 'bsct_receipt',
+  ashray: 'ashray_receipt',
+  beingsevak: 'bsct_receipt',
+}
+
+function getCredentials(projectId) {
+  if (projectId === 'ashray') {
+    return {
+      phoneNumberId: import.meta.env.VITE_WHATSAPP_ASHRAY_PHONE_NUMBER_ID,
+      accessToken: import.meta.env.VITE_WHATSAPP_ASHRAY_ACCESS_TOKEN,
+    }
+  }
+  return {
+    phoneNumberId: import.meta.env.VITE_WHATSAPP_PHONE_NUMBER_ID,
+    accessToken: import.meta.env.VITE_WHATSAPP_ACCESS_TOKEN,
+  }
+}
 
 function cleanMobileNumber(raw) {
   if (!raw) return null
@@ -15,16 +32,16 @@ function cleanMobileNumber(raw) {
   return cleaned
 }
 
-export async function uploadMedia(pdfBlob, fileName) {
+export async function uploadMedia(pdfBlob, fileName, credentials) {
   const formData = new FormData()
   formData.append('messaging_product', 'whatsapp')
   formData.append('file', pdfBlob, fileName)
   formData.append('type', 'application/pdf')
 
-  const res = await fetch(`${API_BASE}/${PHONE_NUMBER_ID}/media`, {
+  const res = await fetch(`${API_BASE}/${credentials.phoneNumberId}/media`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${credentials.accessToken}`,
     },
     body: formData,
   })
@@ -38,11 +55,11 @@ export async function uploadMedia(pdfBlob, fileName) {
   return data.id
 }
 
-export async function sendTemplateWithDocument(to, mediaId, fileName) {
-  const res = await fetch(`${API_BASE}/${PHONE_NUMBER_ID}/messages`, {
+export async function sendTemplateWithDocument(to, mediaId, fileName, templateName, credentials) {
+  const res = await fetch(`${API_BASE}/${credentials.phoneNumberId}/messages`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${credentials.accessToken}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -50,7 +67,7 @@ export async function sendTemplateWithDocument(to, mediaId, fileName) {
       to,
       type: 'template',
       template: {
-        name: 'bsct_receipt',
+        name: templateName,
         language: { code: 'en' },
         components: [
           {
@@ -100,7 +117,10 @@ export async function sendReceiptViaWhatsApp(donor, formattedAmount, formattedDa
 
   const pdfBlob = pdf.output('blob')
 
-  const mediaId = await uploadMedia(pdfBlob, fileName)
+  const credentials = getCredentials(projectId)
+  const templateName = TEMPLATE_NAMES[projectId] || 'bsct_receipt'
 
-  return sendTemplateWithDocument(mobile, mediaId, fileName)
+  const mediaId = await uploadMedia(pdfBlob, fileName, credentials)
+
+  return sendTemplateWithDocument(mobile, mediaId, fileName, templateName, credentials)
 }
